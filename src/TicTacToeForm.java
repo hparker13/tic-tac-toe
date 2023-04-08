@@ -22,9 +22,8 @@ public class TicTacToeForm extends JFrame {
     private JPanel pnlButtons;
     private JButton btnClear;
     private JButton btnEnd;
-    private JPanel pnlLeft;
     private Boolean xTurn = true;
-    private Boolean winner = false;
+    private Boolean winner;
     private int numTurns = 0;
     private int numXWins = 0;
     private int numOWins = 0;
@@ -66,6 +65,7 @@ public class TicTacToeForm extends JFrame {
         btnClear.setFocusable(false);
         btnEnd.setPreferredSize(new Dimension(120, 35));
         btnEnd.setFocusable(false);
+        winner = false;
 
         lstWin1.add(btn1); lstWin1.add(btn2); lstWin1.add(btn3);
         lstWins.add(lstWin1);
@@ -141,6 +141,7 @@ public class TicTacToeForm extends JFrame {
                     button.setEnabled(true);
                     button.setBackground(Color.white);
                 }
+                numTurns = 0;
                 lstX.clear();
                 lstO.clear();
                 xTurn = true;
@@ -152,6 +153,7 @@ public class TicTacToeForm extends JFrame {
                 winner = false;
             }
         });
+
         btnEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -162,33 +164,43 @@ public class TicTacToeForm extends JFrame {
 
 
     void checkForWinner(List<List<JButton>> wins, List<JButton> listXO ) {
-
+        int xWins = 0;
         for (List list : lstWins) {
+
             if (listXO.contains(list.get(0)) && listXO.contains(list.get(1)) && listXO.contains(list.get(2))) {
                 if (xTurn) {
                     lblTurn.setText("O WINS!");
                     numOWins++;
                 } else {
                     lblTurn.setText("X WINS!");
-                    numXWins++;
+                    xWins++;
                 }
                 winner = true;
-                numTurns = 0;
-                btnClear.setText("New Game");
-                disableAllButtons();
+
                 for (JButton button : lstButtons) {
                     if (button.equals(list.get(0)) || button.equals(list.get(1)) || button.equals(list.get(2))) {
                         button.setBackground(Color.lightGray);
                     }
                 }
-
-            } else if (winner == false && numTurns > 8) {
-                numTies++;
-                lblTurn.setText("It's a Tie");
-                numTurns = 0;
-                btnClear.setText("New Game");
-                disableAllButtons();
             }
+        }
+
+        if (xWins >= 1) {
+            numXWins++;
+        }
+
+        if (winner == true) {
+            numTurns = 0;
+            btnClear.setText("New Game");
+            disableAllButtons();
+        }
+
+       if (numTurns == 9 && winner == false) {
+            numTies++;
+            lblTurn.setText("It's a Tie");
+            numTurns = 0;
+            btnClear.setText("New Game");
+            disableAllButtons();
         }
     }
 
