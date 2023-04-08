@@ -8,7 +8,9 @@ import java.util.List;
 
 public class TicTacToeForm extends JFrame {
     private JPanel pnlMain;
+    private JPanel pnlButtons;
     private JLabel lblTurn;
+    private JLabel lblWins;
     private JButton btn1;
     private JButton btn2;
     private JButton btn3;
@@ -18,10 +20,9 @@ public class TicTacToeForm extends JFrame {
     private JButton btn7;
     private JButton btn8;
     private JButton btn9;
-    private JLabel lblWins;
-    private JPanel pnlButtons;
     private JButton btnClear;
     private JButton btnEnd;
+    private ImageIcon ticTacToe;
     private Boolean xTurn = true;
     private Boolean winner;
     private int numTurns = 0;
@@ -87,6 +88,9 @@ public class TicTacToeForm extends JFrame {
         for (JButton button : lstButtons) {
             button.setPreferredSize(new Dimension(150,150));
         }
+
+        ticTacToe = new ImageIcon("src/tic-tac-toe.png");
+        this.setIconImage(ticTacToe.getImage());
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(750, 750);
