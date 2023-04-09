@@ -22,6 +22,8 @@ public class TicTacToeForm extends JFrame {
     private JButton btn9;
     private JButton btnClear;
     private JButton btnEnd;
+    private JPanel pnlLeft;
+    private JComboBox cbColors;
     private ImageIcon ticTacToe;
     private Boolean xTurn = true;
     private Boolean winner;
@@ -29,6 +31,12 @@ public class TicTacToeForm extends JFrame {
     private int numXWins = 0;
     private int numOWins = 0;
     private int numTies = 0;
+    private int color1R;
+    private int color1G;
+    private int color1B;
+    private int color2R;
+    private int color2G;
+    private int color2B;
     private List<JButton> lstX = new ArrayList<>();
     private List<JButton> lstO = new ArrayList<>();
     private List<JButton> lstButtons = new ArrayList<>() {{
@@ -55,17 +63,29 @@ public class TicTacToeForm extends JFrame {
 
     TicTacToeForm() {
         this.setContentPane(pnlMain);
-        lblTurn.setBackground(new Color(0x3E0D56));
+        color1R = 18;
+        color1G = 52;
+        color1B = 86;
+        color2R = 50;
+        color2G = 152;
+        color2B = 255;
+        lblTurn.setBackground(new Color(color1R, color1G, color1B));
         lblTurn.setOpaque(true);
-        lblTurn.setForeground(new Color(0xB624FF));
+        lblTurn.setForeground(new Color(color2R, color2G, color2B));
         lblTurn.setText("X's Turn");
-        pnlButtons.setBackground(new Color(0x3E0D56));
+        pnlButtons.setBackground(new Color(color1R, color1G, color1B));
         pnlButtons.setOpaque(true);
+        pnlLeft.setBackground(new Color(color1R, color1G, color1B));
+        pnlLeft.setOpaque(true);
         lblWins.setText("X Wins: " + numXWins + "     O Wins: " + numOWins + "     Ties " + numTies);
+        lblWins.setForeground(new Color(color1R, color1G, color1B));
         btnClear.setPreferredSize(new Dimension(120, 35));
         btnClear.setFocusable(false);
+        btnClear.setForeground(new Color(color2R, color2G, color2B));
+        btnEnd.setForeground(new Color(color2R, color2G, color2B));
         btnEnd.setPreferredSize(new Dimension(120, 35));
         btnEnd.setFocusable(false);
+        cbColors.setForeground(new Color(color1R, color1G, color1B));
         winner = false;
 
         lstWin1.add(btn1); lstWin1.add(btn2); lstWin1.add(btn3);
@@ -164,6 +184,48 @@ public class TicTacToeForm extends JFrame {
                 dispose();
             }
         });
+        cbColors.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbColors.getSelectedItem() == "Blue") {
+                    color1R = 18;
+                    color1G = 52;
+                    color1B = 86;
+                    color2R = 50;
+                    color2G = 152;
+                    color2B = 255;
+                } else if (cbColors.getSelectedItem() == "Purple") {
+                    color1R = 62;
+                    color1G = 13;
+                    color1B = 86;
+                    color2R = 182;
+                    color2G = 36;
+                    color2B = 255;
+                } else if (cbColors.getSelectedItem() == "Teal") {
+                    color1R = 9;
+                    color1G = 96;
+                    color1B = 103;
+                    color2R = 102;
+                    color2G = 203;
+                    color2B = 199;
+                } else if (cbColors.getSelectedItem() == "Neon") {
+                    color1R = 29;
+                    color1G = 29;
+                    color1B = 29;
+                    color2R = 57;
+                    color2G = 225;
+                    color2B = 20;
+                }
+                pnlButtons.setBackground(new Color(color1R, color1G, color1B));
+                pnlLeft.setBackground(new Color(color1R, color1G, color1B));
+                lblTurn.setBackground(new Color(color1R, color1G, color1B));
+                lblWins.setForeground(new Color(color1R, color1G, color1B));
+                cbColors.setForeground(new Color(color1R, color1G, color1B));
+                lblTurn.setForeground(new Color(color2R, color2G, color2B));
+                btnClear.setForeground(new Color(color2R, color2G, color2B));
+                btnEnd.setForeground(new Color(color2R, color2G, color2B));
+            }
+        });
     }
 
 
@@ -218,11 +280,10 @@ public class TicTacToeForm extends JFrame {
     void setDisabledButtonsStyle() {
 
         if (!xTurn) {
-            UIManager.getDefaults().put("Button.disabledText", new ColorUIResource(new Color(0xB624FF)));
+            UIManager.getDefaults().put("Button.disabledText", new ColorUIResource(new Color(color2R, color2G, color2B)));
         } else {
-            UIManager.getDefaults().put("Button.disabledText",new ColorUIResource(new Color(0x3E0D56)));
+            UIManager.getDefaults().put("Button.disabledText",new ColorUIResource(new Color(color1R, color1G, color1B)));
         }
     }
-
 
 }
