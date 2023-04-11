@@ -215,6 +215,13 @@ public class TicTacToeForm extends JFrame {
                     color2R = 57;
                     color2G = 225;
                     color2B = 20;
+                } else if (cbColors.getSelectedItem() == "Burgundy") {
+                    color1R = 124;
+                    color1G = 16;
+                    color1B = 52;
+                    color2R = 246;
+                    color2G = 176;
+                    color2B = 151;
                 }
                 pnlButtons.setBackground(new Color(color1R, color1G, color1B));
                 pnlLeft.setBackground(new Color(color1R, color1G, color1B));
@@ -282,7 +289,13 @@ public class TicTacToeForm extends JFrame {
         if (!xTurn) {
             UIManager.getDefaults().put("Button.disabledText", new ColorUIResource(new Color(color2R, color2G, color2B)));
         } else {
-            UIManager.getDefaults().put("Button.disabledText",new ColorUIResource(new Color(color1R, color1G, color1B)));
+            if (cbColors.getSelectedItem() == "Neon") {
+                if (xTurn) {
+                    UIManager.getDefaults().put("Button.disabledText",new ColorUIResource(new Color(255, 95, 31)));
+                }
+            } else {
+                UIManager.getDefaults().put("Button.disabledText", new ColorUIResource(new Color(color1R, color1G, color1B)));
+            }
         }
     }
 

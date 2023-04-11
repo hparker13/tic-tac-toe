@@ -156,6 +156,7 @@
             <properties>
               <model>
                 <item value="Blue"/>
+                <item value="Burgundy"/>
                 <item value="Neon"/>
                 <item value="Purple"/>
                 <item value="Teal"/>
